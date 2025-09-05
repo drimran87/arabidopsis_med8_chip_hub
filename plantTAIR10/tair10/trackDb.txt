@@ -1,6 +1,6 @@
 # --- Med8 Chipseq bigWig tracks ---
-track Col0_CTRL_REP1
-shortLabel WT_CTRL_R1
+track Col0_REP1
+shortLabel Col-0_CTRL_R1
 longLabel Med8 ChIP-seq on wild-type Col-0 leaves (Rep1)
 type bigWig
 bigDataUrl https://ndownloader.figshare.com/files/57644383
@@ -10,8 +10,8 @@ autoScale on
 maxHeightPixels 64:32:16
 priority 1
 
-track Col0_CTRL_REP2
-shortLabel WT_CTRL_R2
+track Col0_REP2
+shortLabel Col-0_CTRL_R2
 longLabel Med8 ChIP-seq on wild-type Col-0 leaves (Rep2)
 type bigWig
 bigDataUrl https://ndownloader.figshare.com/files/57644380
@@ -21,8 +21,8 @@ autoScale on
 maxHeightPixels 64:32:16
 priority 2
 
-track Col0_CTRL_REP3
-shortLabel WT_CTRL_R3
+track Col0_REP3
+shortLabel Col-0_CTRL_R3
 longLabel Med8 ChIP-seq on wild-type Col-0 leaves (Rep3)
 type bigWig
 bigDataUrl https://ndownloader.figshare.com/files/57644386
@@ -32,7 +32,7 @@ autoScale on
 maxHeightPixels 64:32:16
 priority 3
 
-track med18_CTRL_REP1
+track med18_REP1
 shortLabel med18_CTRL_R1
 longLabel Med8 ChIP-seq on med18 leaves (Rep1)
 type bigWig
@@ -43,7 +43,7 @@ autoScale on
 maxHeightPixels 64:32:16
 priority 4
 
-track med18_CTRL_REP2
+track med18_REP2
 shortLabel med18_CTRL_R2
 longLabel Med8 ChIP-seq on med18 leaves (Rep2)
 type bigWig
@@ -54,7 +54,7 @@ autoScale on
 maxHeightPixels 64:32:16
 priority 5
 
-track med18_CTRL_REP3
+track med18_REP3
 shortLabel med18_CTRL_R3
 longLabel Med8 ChIP-seq on med18 leaves (Rep3)
 type bigWig
