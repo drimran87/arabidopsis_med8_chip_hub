@@ -65,7 +65,7 @@ bedToBigBed -type=bed6 tair10/tair10.genes.bed \
   tair10/tair10.chrom.sizes tair10/tair10.araport11.genes.bb
 ```
 ### Transcript IDs (BED12)
-We used *docker and pulled container immage for ```gtftogenepred```, ```genepredtobed```, and ```bedtobigbed``` to execute this step
+We used **docker** and pulled container immage for ```gtftogenepred```, ```genepredtobed```, and ```bedtobigbed``` to execute this step
 
 
 ```bash
@@ -99,4 +99,58 @@ docker run --rm \
 ```
 ## Hub control files
 ```hub.txt```
+```txt
+hub arabidopsis_med8_chip_hub
+shortLabel Med8 ChIP-seq Arabidopsis (TAIR10)
+longLabel Mediator subunit 8 (Med8) ChIP-seq signal on Arabidopsis thaliana Col-0 (wild-type) and med18 mutant.
+genomesFile genomes.txt
+email qmu.imran@gmail.com
+```
+```genomes.txt```
+```txt
+genome tair10
+trackDb tair10/trackDb.txt
+groups groups.txt
+description Feb. 2011 Thale cress
+twoBitPath tair10/TAIR10_chr_all.2bit
+organism Arabidopsis thaliana
+defaultPos Chr1:1000000-2000000
+scientificName Arabidopsis thaliana
+```
+```tair10/trackDb.txt```
+Here is the way to document bigwig signals in ```trackDB.txt``` file
+```txt
+track Col0_REP1
+shortLabel Col-0_CTRL_R1
+longLabel Med8 ChIP-seq on wild-type Col-0 leaves (Rep1)
+type bigWig
+bigDataUrl https://ndownloader.figshare.com/files/57644383
+color 128,0,0
+visibility full
+autoScale on
+maxHeightPixels 64:32:16
+priority 1
+```
+Here is how the genes and transcripts were presented
+```txt
+track araport11_genes
+shortLabel TAIR10 genes
+longLabel TAIR10/Araport11 gene loci (AT IDs)
+type bigBed 6
+bigDataUrl bbi/tair10.araport11.genes.bb
+visibility pack
 
+track araport11_tx
+shortLabel Araport11 Tx
+longLabel Araport11 transcripts (Oct 2023)
+type bigBed 12 +
+bigDataUrl bbi/tair10.araport11.transcripts.bb
+visibility pack
+```
+We manually adjusted the track height, however this can be controlled by keeping ```autoScale off```, and mentioning track height using ```viewLimits``` (e.g., ```0:15). 
+## Loading Track Hub and Session
+Following are some of the steps that can be used to load ```Track Hub``` on **UCSC genome browser**.
+1. Make the **github repository** public. Copy the **Raw URL** to ```hub.txt```
+2. On UCSC website click **My Data** then **Track Hubs**, past the URL in the url box → **Add Hub**
+3. Check chromosome names etc to confirm if everything is in order
+4. **My Data** → **My Sessions** → save a named shared session → copy the short link (test in a private window).
