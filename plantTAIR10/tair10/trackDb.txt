@@ -1,4 +1,4 @@
-# --- Your Med8 bigWig tracks ---
+# --- Med8 Chipseq bigWig tracks ---
 track Col0_CTRL_REP1
 shortLabel WT_CTRL_R1
 longLabel Med8 ChIP-seq on wild-type Col-0 leaves (Rep1)
