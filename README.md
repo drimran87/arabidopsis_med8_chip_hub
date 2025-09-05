@@ -15,6 +15,7 @@ Following are some of the steps we have been through
 **2. Host large files**: The files need to be stored on internet accissible web or ftp server. We store bigWigs on Figshare (GitHub has size limits). You’ll need a direct download link for each file: in Figshare go to your item → Manage files → … (Actions) → copy the download URL (it should be https://ndownloader.figshare.com/files/<ID>; add ?private_link=<TOKEN> if the item is private).
 
 **3. Create a GitHub repo** for the hub control files and any small annotation files. The minimal structure:
+```plaintext
 hubDirectory/
   ├─ hub.txt
   ├─ genomes.txt
@@ -24,3 +25,4 @@ hubDirectory/
      ├─ tair10.chrom.sizes
      ├─ tair10.araport11.genes.bb            # built below
      └─ tair10.araport11.transcripts.bb      # built below
+```
