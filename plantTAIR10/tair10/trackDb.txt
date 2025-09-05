@@ -75,6 +75,7 @@ visibility full
 autoScale on
 maxHeightPixels 64:32:16
 priority 7
+
 #reference tracks 
 track cytoBandIdeo
 longLabel Chromosome ideogram with cytogenetic bands
