@@ -130,4 +130,17 @@ priority 7
 #bigDataUrl bbi/araTha1.simpleRepeat.bb
 #html simpleRepeat
 
+track araport11_genes
+shortLabel TAIR10 genes
+longLabel TAIR10/Araport11 gene loci (AT IDs)
+type bigBed 6
+bigDataUrl bbi/tair10.araport11.genes.bb
+visibility pack
+
+track araport11_tx
+shortLabel Araport11 Tx
+longLabel Araport11 transcripts (Oct 2023)
+type bigBed 12 +
+bigDataUrl bbi/tair10.araport11.transcripts.bb
+visibility pack
 
