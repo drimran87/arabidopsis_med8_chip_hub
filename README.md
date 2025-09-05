@@ -26,3 +26,77 @@ hubDirectory/
      ├─ tair10.araport11.genes.bb            # built below
      └─ tair10.araport11.transcripts.bb      # built below
 ```
+## Prerequisites, tools etc
+
+We used a conda env for core UCSC tools but got into problems with some OpenSSL issues therefore, switched to Docker (BioContainers) for a few utilities that otherwise required legacy OpenSSL.
+
+```bash
+# create / use the working env
+conda create -n ucsc -c bioconda -c conda-forge \
+  ucsc-fatotwobit ucsc-twobitinfo ucsc-bedtobigbed ucsc-bigwiginfo
+conda activate ucsc
+
+```
+If any UCSC binary complains about libssl.so.1.0.0, run that specific step **via Docker** 
+## Build the genome files (Chr naming)
+Our FASTA headers already use Chr1–Chr5, ChrC, ChrM: For compatibility with UCSC genome, we need to convert it into ```.2bit``` file see below
+
+```bash
+faToTwoBit TAIR10_chr.fa tair10/tair10.2bit
+twoBitInfo  tair10/tair10.2bit stdout > tair10/tair10.chrom.sizes
+```
+## Build the Araport11 gene annotations (gene IDs)
+
+We generate two helpful tracks:
+
+*Genes (BED6) — one locus per AT gene (labels like AT1G01010).
+
+*Transcripts (BED12) — exon structures per transcript (labels like AT1G01010.1).
+### A) For the first one lets use ```awk``` as below
+```bash
+awk 'BEGIN{FS=OFS="\t"}
+  $3=="gene" {
+    match($9,/gene_id "([^"]+)"/,m); name=(m[1]?m[1]:".");
+    print $1,$4-1,$5,name,0,$7
+  }' Araport11_GTF_genes_transposons.Oct2023.gtf \
+| sort -k1,1 -k2,2n > tair10/tair10.genes.bed
+
+bedToBigBed -type=bed6 tair10/tair10.genes.bed \
+  tair10/tair10.chrom.sizes tair10/tair10.araport11.genes.bb
+```
+### Transcript IDs (BED12)
+We used *docker and pulled container immage for ```gtftogenepred```, ```genepredtobed```, and ```bedtobigbed``` to execute this step
+
+
+```bash
+# 1) GTF -> genePred
+docker pull quay.io/biocontainers/ucsc-gtftogenepred:482--h0b57e2e_0
+docker run --rm \
+  -u $(id -u):$(id -g) \
+  -v "$PWD":/work -w /work \
+  quay.io/biocontainers/ucsc-gtftogenepred:482--h0b57e2e_0 \
+  gtfToGenePred -genePredExt -ignoreGroupsWithoutExons \
+  Araport11_GTF_genes_transposons.Oct2023.gtf araport11.gp
+
+# 2) genePred -> BED12
+docker pull quay.io/biocontainers/ucsc-genepredtobed:469--h664eb37_1
+docker run --rm \
+  -u $(id -u):$(id -g) \
+  -v "$PWD":/work -w /work \
+  quay.io/biocontainers/ucsc-genepredtobed:469--h664eb37_1 \
+  genePredToBed araport11.gp araport11.tx.bed
+
+# 3) sort & build bigBed
+sort -k1,1 -k2,2n araport11.tx.bed > araport11.tx.sorted.bed
+
+docker pull quay.io/biocontainers/ucsc-bedtobigbed:482--hdc0a859_0
+docker run --rm \
+  -u $(id -u):$(id -g) \
+  -v "$PWD":/work -w /work \
+  quay.io/biocontainers/ucsc-bedtobigbed:482--hdc0a859_0 \
+  bedToBigBed -type=bed12+ araport11.tx.sorted.bed \
+  tair10/tair10.chrom.sizes tair10/tair10.araport11.transcripts.bb
+```
+## Hub control files
+```hub.txt```
+
