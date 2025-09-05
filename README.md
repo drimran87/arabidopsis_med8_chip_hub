@@ -64,7 +64,7 @@ awk 'BEGIN{FS=OFS="\t"}
 bedToBigBed -type=bed6 tair10/tair10.genes.bed \
   tair10/tair10.chrom.sizes tair10/tair10.araport11.genes.bb
 ```
-### Transcript IDs (BED12)
+### B) Transcript IDs (BED12)
 We used **docker** and pulled container immage for ```gtftogenepred```, ```genepredtobed```, and ```bedtobigbed``` to execute this step
 
 
@@ -152,5 +152,5 @@ We manually adjusted the track height, however this can be controlled by keeping
 Following are some of the steps that can be used to load ```Track Hub``` on **UCSC genome browser**.
 1. Make the **github repository** public. Copy the **Raw URL** to ```hub.txt```
 2. On UCSC website click **My Data** then **Track Hubs**, past the URL in the url box → **Add Hub**
-3. Check chromosome names etc to confirm if everything is in order
+3. Check chromosome names etc. to confirm if everything is in order.
 4. **My Data** → **My Sessions** → save a named shared session → copy the short link (test in a private window).
