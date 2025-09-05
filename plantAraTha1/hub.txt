@@ -1,6 +1,0 @@
-hub arabidopsis_med8_chip_hub
-shortLabel Med8 ChIP-seq Arabidopsis (TAIR10)
-longLabel Mediator subunit 8 (Med8) ChIP-seq signal on Arabidopsis thaliana Col-0 (wild-type) and med18 mutant.
-genomesFile genomes.txt
-email qmu.imran@gmail.com
-descriptionUrl plants.html
