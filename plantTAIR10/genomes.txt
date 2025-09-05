@@ -1,0 +1,14 @@
+genome tair10
+trackDb tair10/trackDb.txt
+groups groups.txt
+description Feb. 2011 Thale cress
+twoBitPath tair10/TAIR10_chr_all.2bit
+organism Arabidopsis thaliana
+defaultPos Chr1:1000000-2000000
+scientificName Arabidopsis thaliana
+#blat localhost 17779
+#transBlat localhost 17777
+#isPcr localhost 17779
+#Note: Usually instead of localhost you will use the host name of where the gfserver is located (blat yourLab.yourInstitution.edu 17779) 
+#See more here: http://genomewiki.ucsc.edu/index.php/Assembly_Hubs#Adding_BLAT_servers
+#isPcr provides the option to use a different gfServer than the blat host if desired.
